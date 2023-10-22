@@ -8,6 +8,7 @@ interface UserData {
   username: string;
   dateOfBirth: Date;
   price: number;
+  rating: number;
 }
 
 export function getUserData(userId: string): UserData {
@@ -32,6 +33,7 @@ export function getUserData(userId: string): UserData {
     username: data.username,
     dateOfBirth: data.dateOfBirth,
     price: data.price,
+    rating: data.rating,
   };
 
   return userData;
@@ -80,10 +82,17 @@ export function setUsername(userId: string, newUser: string) {
   updateUser(userId, data);
 }
 
-// set user's username
+// set driver's username
 export function setPrice(userId: string, newPrice: number) {
   var data = getUserData(userId);
   data.price = newPrice;
+  updateUser(userId, data);
+}
+
+// update driver's rating
+export function updateRating(userId: string, newRating: number) {
+  var data = getUserData(userId);
+  data.rating = newRating;
   updateUser(userId, data);
 }
 

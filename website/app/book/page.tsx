@@ -14,8 +14,11 @@ export default function Home() {
   return (
     <div className="relative text-center">
       <div className="absolute z-10 bg-white rounded-sm m-12 h-3/4">
-        <h1 className="text-3xl font-bold m-5">Book</h1>
+        <h1 className="text-2xl font-bold m-5">Book</h1>
       </div>
+      {/* <div className="absolute z-10 bg-white rounded-sm self-end inset-x-0 ml-auto inset-y-0 mt-auto mb-36 mr-12 w-64 h-1/4">
+        <h1 className="text-xl font-bold m-5">Driver</h1>
+      </div> */}
       <Map />
     </div>
   );

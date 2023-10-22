@@ -1,5 +1,6 @@
-import React, { FormEvent } from "react";
+import { FormEvent } from "react";
 import "./questions.css";
+import Link from "next/link";
 const questions = () => {
   const saveInput = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -18,6 +19,7 @@ const questions = () => {
         <input type="text" id="answer"></input>
         <button>Firebase Submission</button>
       </form>
+      <Link href={"/book"}>book</Link>
     </div>
   );
 };
