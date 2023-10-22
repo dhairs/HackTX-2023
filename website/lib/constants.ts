@@ -5,10 +5,11 @@ export const routes = {
   login: "/login",
   register: "/register",
   onboarding: "/onboarding",
-  dashboard: "/dashboard",
+  ride: "/book",
   profile: "/profile",
   settings: "/settings",
   notFound: "/404",
+  driverOrRider: "/driver-or-rider",
 };
 
 export const routingFunctions = {

@@ -1,16 +1,15 @@
 import { firestore } from "./firestore";
 
-//instance
-
 interface UserData {
   firstName: string;
   lastName: string;
   phoneNumber: string;
   email: string;
   username: string;
+  dateOfBirth: Date;
 }
 
-export function getUserData(userId: string) {
+export function getUserData(userId: string): UserData {
   const docRef = firestore.collection("users").doc(userId);
 
   var data: UserData = {} as UserData;
@@ -23,13 +22,14 @@ export function getUserData(userId: string) {
     }
   });
 
-  //store all values into userData
-  var userData = {
+  // store all values into userData
+  var userData: UserData = {
     firstName: data.firstName,
     lastName: data.lastName,
     phoneNumber: data.phoneNumber,
     email: data.email,
     username: data.username,
+    dateOfBirth: data.dateOfBirth,
   };
 
   return userData;

@@ -26,7 +26,7 @@ export const options: NextAuthOptions = {
     //     password: { label: "Password:", type: "password" },
     //   },
     //   async authorize(credentials, req) {
-    //     const user = { id: "42", name: "Dave", password: "nextauth" };
+    //     const { id, email } = credentials;
 
     //     if (
     //       credentials?.username === user.name &&
@@ -39,19 +39,19 @@ export const options: NextAuthOptions = {
     //   },
     // }),
   ],
-  // session: {
-  //   strategy: "jwt",
-  // },
-  // callbacks: {
-  //   session: async ({ session, token }) => {
-  //     session.user.id = token.id;
-  //     session.user.role = token.role || "user";
-  //     return session;
-  //   },
-  //   jwt: async ({ token, user, account }) => {
-  //     if (user) token.id = user.id;
-  //     return token;
-  //   },
-  // },
+  session: {
+    strategy: "jwt",
+  },
+  callbacks: {
+    session: async ({ session, token }) => {
+      session.user.id = token.id;
+      session.user.role = token.role || "user";
+      return session;
+    },
+    jwt: async ({ token, user, account }) => {
+      if (user) token.id = user.id;
+      return token;
+    },
+  },
   adapter: FirestoreAdapter(firestore),
 };

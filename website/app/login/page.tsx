@@ -12,7 +12,7 @@ interface IFormInput {
 export default async function Login() {
   var user = await getServerSession(options);
   if (user) {
-    redirect(routes.dashboard);
+    redirect(routes.ride);
   }
   console.log(user);
   return (
