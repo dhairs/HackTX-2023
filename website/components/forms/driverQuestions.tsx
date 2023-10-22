@@ -4,6 +4,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
 import { Button } from "@/components/ui/button";
+
+import { useRouter } from "next/navigation";
+
 import {
   Form,
   FormControl,
@@ -14,18 +17,21 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { redirect } from "next/navigation";
+import { routes } from "@/lib/constants";
 const formSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   isDriver: z.boolean(),
   phoneNumber: z.string(),
   // .regex(RegExp("/^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$/im")),
-  email: z.string().email(),
+  // email: z.string().email(),
   dateOfBirth: z.date(),
   price: z.number(),
 });
 
 export function DriverQuestions() {
+  const router = useRouter();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -33,7 +39,7 @@ export function DriverQuestions() {
       firstName: "",
       lastName: "",
       phoneNumber: "",
-      email: "",
+      // email: "",
       dateOfBirth: new Date(),
       isDriver: true,
       price: 10,
@@ -48,6 +54,10 @@ export function DriverQuestions() {
     fetch("/api/forms/signup", {
       method: "POST",
       body: JSON.stringify(values),
+    }).then((res) => {
+      if (res.status == 200) {
+        router.push(routes.ride);
+      }
     });
   }
 
@@ -96,20 +106,7 @@ export function DriverQuestions() {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="email"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel>Email</FormLabel>
-              <FormControl>
-                <Input placeholder="contact@ridechariot.tech" {...field} />
-              </FormControl>
-              <FormDescription></FormDescription>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+
         {/* <FormField
           control={form.control}
           name="dateOfBirth"
@@ -131,7 +128,15 @@ export function DriverQuestions() {
             <FormItem>
               <FormLabel>Price</FormLabel>
               <FormControl>
-                <Input prefix="$" placeholder="$10" {...field} />
+                <Input
+                  prefix="$"
+                  placeholder="$10"
+                  type="number"
+                  {...field}
+                  onChange={(event) => {
+                    form.setValue("price", parseInt(event.target.value));
+                  }}
+                />
               </FormControl>
               <FormDescription></FormDescription>
               <FormMessage />

@@ -1,7 +1,11 @@
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24 bg-black bg-cover">
-      <div className="bg-purple-800 border-purple-300 border-b-8 p-16 m-4 -translate-x-80 -translate-y-20">
+      <div
+        className="bg-cover"
+        // style="background-image: url('...'); height: 400px"
+      ></div>
+      <div className="bg-purple-800 border-purple-300 border-b-8 p-16 m-4 -translate-x-80 -translate-y-40">
         <h2 className="text-4xl text-purple-300 font-bold">
           Chariots for <br />
           <span className="text-4xl text-white font-bold">

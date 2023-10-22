@@ -55,6 +55,6 @@ export const options: NextAuthOptions = {
   },
   adapter: FirestoreAdapter(firestore),
   pages: {
-    newUser: "/onboarding",
+    newUser: "/onboarding/driver-or-rider",
   },
 };

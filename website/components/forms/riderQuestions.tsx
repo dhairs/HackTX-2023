@@ -18,17 +18,21 @@ import { UserData } from "@/lib/database";
 import { Calendar } from "../ui/calendar";
 import { DatePicker } from "../ui/date-picker";
 import { ChangeEvent } from "react";
+import { redirect } from "next/navigation";
+import { routes } from "@/lib/constants";
+import { useRouter } from "next/navigation";
 const formSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
   isDriver: z.boolean(),
   phoneNumber: z.string(),
   // .regex(RegExp("/^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$/im")),
-  email: z.string().email(),
+  // email: z.string().email(),
   dateOfBirth: z.date(),
 });
 
 export function ProfileForm() {
+  const router = useRouter();
   // 1. Define your form.
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -36,7 +40,7 @@ export function ProfileForm() {
       firstName: "",
       lastName: "",
       phoneNumber: "",
-      email: "",
+      // email: "",
       dateOfBirth: new Date(),
       isDriver: false,
     },
@@ -50,6 +54,10 @@ export function ProfileForm() {
     fetch("/api/forms/signup", {
       method: "POST",
       body: JSON.stringify(values),
+    }).then((res) => {
+      if (res.status == 200) {
+        router.push(routes.ride);
+      }
     });
   }
 
@@ -99,7 +107,7 @@ export function ProfileForm() {
             </FormItem>
           )}
         />
-        <FormField
+        {/* <FormField
           control={form.control}
           name="email"
           render={({ field }) => (
@@ -112,7 +120,7 @@ export function ProfileForm() {
               <FormMessage />
             </FormItem>
           )}
-        />
+        /> */}
         {/* <FormField
           control={form.control}
           name="dateOfBirth"
