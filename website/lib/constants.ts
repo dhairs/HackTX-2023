@@ -10,10 +10,11 @@ export const routes = {
     driver: "/onboarding/driver",
   },
   ride: "/book",
-  profile: "/profile",
+  dashboard: "/dashboard",
   settings: "/settings",
   notFound: "/404",
   driverOrRider: "/driver-or-rider",
+  logout: "/api/auth/signout",
 };
 
 export const routingFunctions = {

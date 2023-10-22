@@ -2,6 +2,7 @@ import Link from "next/link";
 import { routes, routingFunctions } from "@/lib/constants";
 import { getServerSession } from "next-auth";
 import { options } from "@/lib/auth/options";
+import { Avatar, AvatarFallback, AvatarImage } from "./avatar";
 
 export default async function Navbar() {
   const session = await getServerSession(options);
@@ -88,6 +89,21 @@ export default async function Navbar() {
                 className="duration-150 text-white bg-purple-400 hover:bg-purple-800 focus:ring-4 border-purple-400 border-2 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
               >
                 Get started
+              </Link>
+            ) : null}
+
+            {session ? (
+              <Link href={routes.dashboard}>
+                <Avatar>
+                  <AvatarImage
+                    height={16}
+                    width={16}
+                    src={session.user.image || ""}
+                  />
+                  <AvatarFallback>
+                    {session.user.name?.substring(0, 1)}
+                  </AvatarFallback>
+                </Avatar>
               </Link>
             ) : null}
             <button

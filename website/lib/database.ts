@@ -94,3 +94,14 @@ export async function isOnboarded(userId: string) {
   var data = await getUserData(userId);
   return data.onboarded;
 }
+
+export async function getAllDrivers() {
+  const docRef = firestore.collection("users").where("isDriver", "==", true);
+
+  var allData: UserData[] = [];
+  (await docRef.get()).forEach((doc) => {
+    allData.push(doc.data() as UserData);
+  });
+
+  return allData;
+}

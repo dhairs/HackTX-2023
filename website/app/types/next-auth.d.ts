@@ -9,6 +9,7 @@ declare module "next-auth" {
       id: string;
       role: "driver" | "rider";
       onboarded: boolean;
+      firstName: string;
     } & DefaultSession["user"];
   }
 }
@@ -22,6 +23,7 @@ declare module "next-auth/jwt" {
     /** The user's role. */
     role: "driver" | "rider";
     onboarded: boolean;
+    firstName: string;
     id: string;
   }
 }

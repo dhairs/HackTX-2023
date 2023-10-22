@@ -48,12 +48,18 @@ export const options: NextAuthOptions = {
       session.user.id = token.id;
       session.user.role = token.role || "rider";
       session.user.onboarded = token.onboarded;
+      session.user.firstName = token.firstName;
 
       return session;
     },
     jwt: async ({ token, user, account }) => {
       if (user) token.id = user.id;
-      if (user) token.onboarded = await isOnboarded(user.id);
+      if (user) {
+        let newData = await getUserData(user.id);
+        token.firstName = newData.firstName;
+        token.onboarded = newData.onboarded;
+      }
+
       return token;
     },
   },
