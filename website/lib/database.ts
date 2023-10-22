@@ -1,14 +1,15 @@
 import { firestore } from "./firestore";
 
-interface UserData {
+export interface UserData {
   firstName: string;
   lastName: string;
   phoneNumber: string;
   email: string;
-  username: string;
   dateOfBirth: Date;
-  price: number;
-  rating: number;
+  isDriver: boolean;
+  price?: number;
+  rating?: number;
+  joinDate: Date;
 }
 
 export function getUserData(userId: string): UserData {
@@ -24,19 +25,7 @@ export function getUserData(userId: string): UserData {
     }
   });
 
-  // store all values into userData
-  var userData: UserData = {
-    firstName: data.firstName,
-    lastName: data.lastName,
-    phoneNumber: data.phoneNumber,
-    email: data.email,
-    username: data.username,
-    dateOfBirth: data.dateOfBirth,
-    price: data.price,
-    rating: data.rating,
-  };
-
-  return userData;
+  return data;
 }
 
 // update the user's info
@@ -75,12 +64,12 @@ export function setPhoneNumber(userId: string, newPhone: string) {
   updateUser(userId, data);
 }
 
-// set user's username
-export function setUsername(userId: string, newUser: string) {
-  var data = getUserData(userId);
-  data.username = newUser;
-  updateUser(userId, data);
-}
+// // set user's username
+// export function setUsername(userId: string, newUser: string) {
+//   var data = getUserData(userId);
+//   data.username = newUser;
+//   updateUser(userId, data);
+// }
 
 // set driver's username
 export function setPrice(userId: string, newPrice: number) {

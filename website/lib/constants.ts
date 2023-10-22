@@ -4,7 +4,11 @@ export const routes = {
   home: "/",
   login: "/login",
   register: "/register",
-  onboarding: "/onboarding",
+  onboarding: {
+    initial: "/onboarding/driver-or-rider",
+    rider: "/onboarding/rider",
+    driver: "/onboarding/driver",
+  },
   ride: "/book",
   profile: "/profile",
   settings: "/settings",

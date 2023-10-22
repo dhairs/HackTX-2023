@@ -1,10 +1,5 @@
 import { MapStyle } from "@/lib/mapStyle";
-import {
-  GoogleMap,
-  GoogleMapsMarkerClusterer,
-  Marker,
-  OverlayView,
-} from "@react-google-maps/api";
+import { GoogleMap, OverlayView } from "@react-google-maps/api";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -14,7 +9,6 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { CalendarDays, Star } from "lucide-react";
-import { Button } from "./button";
 
 interface DataForDriver {
   [key: string]: {
@@ -52,27 +46,9 @@ export default function Map() {
       options={{
         disableDefaultUI: true,
         styles: MapStyle,
-        // scrollwheel: false,
         keyboardShortcuts: false,
       }}
     >
-      {/* <Marker position={{ lat: location.lat, lng: location.lng }}>
-        <Image
-          src={driverData.Test.profile_picture}
-          width={80}
-          height={80}
-          alt="profile of test driver"
-        />
-      </Marker> */}
-
-      {/* {Object.entries(data).map(([key, driver]) => (
-        <Marker
-          key={key}
-          icon={{ path: google.maps.SymbolPath.CIRCLE, scale: 7 }}
-          position={{ lat: driver.position.lat, lng: driver.position.lng }}
-        />
-      ))} */}
-
       <Driver map={google.maps.Map} />
     </GoogleMap>
   );
