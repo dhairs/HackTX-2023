@@ -7,7 +7,6 @@ export default async function OnboardingLayout({
   children,
 }: {
   children: React.ReactNode;
-  pageProps: any;
 }) {
   const user = await getServerSession(options);
   if (!user) {
