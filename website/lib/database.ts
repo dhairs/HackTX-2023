@@ -10,6 +10,7 @@ export interface UserData {
   price?: number;
   rating?: number;
   joinDate: Date;
+  onboarded: boolean;
 }
 
 export function getUserData(userId: string): UserData {

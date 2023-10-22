@@ -2,8 +2,8 @@ import { signIn } from "next-auth/react";
 
 export const routes = {
   home: "/",
-  login: "/login",
-  register: "/register",
+  login: "/api/auth/signin",
+  register: "/api/auth/signin",
   onboarding: {
     initial: "/onboarding/driver-or-rider",
     rider: "/onboarding/rider",

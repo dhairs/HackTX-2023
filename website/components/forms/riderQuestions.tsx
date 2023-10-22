@@ -29,6 +29,7 @@ const formSchema = z.object({
   // .regex(RegExp("/^[+]?[(]?[0-9]{3}[)]?[-s.]?[0-9]{3}[-s.]?[0-9]{4,6}$/im")),
   // email: z.string().email(),
   dateOfBirth: z.date(),
+  onboarded: z.boolean(),
 });
 
 export function ProfileForm() {
@@ -43,6 +44,7 @@ export function ProfileForm() {
       // email: "",
       dateOfBirth: new Date(),
       isDriver: false,
+      onboarded: true,
     },
   });
 
@@ -136,7 +138,7 @@ export function ProfileForm() {
             </FormItem>
           )}
         /> */}
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Get started!</Button>
       </form>
     </Form>
   );

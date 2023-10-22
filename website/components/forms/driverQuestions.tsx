@@ -28,6 +28,7 @@ const formSchema = z.object({
   // email: z.string().email(),
   dateOfBirth: z.date(),
   price: z.number(),
+  onboarded: z.boolean(),
 });
 
 export function DriverQuestions() {
@@ -43,6 +44,7 @@ export function DriverQuestions() {
       dateOfBirth: new Date(),
       isDriver: true,
       price: 10,
+      onboarded: true,
     },
   });
 
@@ -143,7 +145,7 @@ export function DriverQuestions() {
             </FormItem>
           )}
         />
-        <Button type="submit">Submit</Button>
+        <Button type="submit">Get started!</Button>
       </form>
     </Form>
   );
