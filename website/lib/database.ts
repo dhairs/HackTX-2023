@@ -7,6 +7,7 @@ interface UserData {
   email: string;
   username: string;
   dateOfBirth: Date;
+  price: number;
 }
 
 export function getUserData(userId: string): UserData {
@@ -30,6 +31,7 @@ export function getUserData(userId: string): UserData {
     email: data.email,
     username: data.username,
     dateOfBirth: data.dateOfBirth,
+    price: data.price,
   };
 
   return userData;
@@ -75,5 +77,19 @@ export function setPhoneNumber(userId: string, newPhone: string) {
 export function setUsername(userId: string, newUser: string) {
   var data = getUserData(userId);
   data.username = newUser;
+  updateUser(userId, data);
+}
+
+// set user's username
+export function setPrice(userId: string, newPrice: number) {
+  var data = getUserData(userId);
+  data.price = newPrice;
+  updateUser(userId, data);
+}
+
+// set user's username
+export function setDoB(userId: string, newDoB: Date) {
+  var data = getUserData(userId);
+  data.dateOfBirth = newDoB;
   updateUser(userId, data);
 }

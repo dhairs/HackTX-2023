@@ -1,6 +1,3 @@
-import { options } from "../api/auth/[...nextauth]/options";
-import { getServerSession } from "next-auth/next";
-
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">

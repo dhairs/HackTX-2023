@@ -1,9 +1,9 @@
 "use client";
-import { useMemo } from "react";
 import { GoogleMap, useLoadScript, Marker } from "@react-google-maps/api";
 import { MapStyle } from "@/lib/mapStyle";
-import Link from "next/link";
-import { routes } from "@/lib/constants";
+
+import { useEffect, useState } from "react";
+import Map from "@/components/ui/map";
 
 export default function Home() {
   const { isLoaded } = useLoadScript({
@@ -18,16 +18,5 @@ export default function Home() {
       </div>
       <Map />
     </div>
-  );
-}
-
-function Map() {
-  return (
-    <GoogleMap
-      zoom={10}
-      center={{ lat: 44, lng: -80 }}
-      mapContainerClassName="w-100 h-screen z-0 fixed"
-      options={{ disableDefaultUI: true, styles: MapStyle }}
-    />
   );
 }
