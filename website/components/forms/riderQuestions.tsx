@@ -21,6 +21,7 @@ import { ChangeEvent } from "react";
 import { redirect } from "next/navigation";
 import { routes } from "@/lib/constants";
 import { useRouter } from "next/navigation";
+import { signIn } from "next-auth/react";
 const formSchema = z.object({
   firstName: z.string(),
   lastName: z.string(),
@@ -58,6 +59,7 @@ export function ProfileForm() {
       body: JSON.stringify(values),
     }).then((res) => {
       if (res.status == 200) {
+        signIn("jwt", { redirect: false });
         router.push(routes.ride);
       }
     });

@@ -1,9 +1,10 @@
-import type { NextAuthOptions } from "next-auth";
+import type { NextAuthOptions, User } from "next-auth";
 import GitHubProvider from "next-auth/providers/github";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { FirestoreAdapter } from "@auth/firebase-adapter";
 import { firestore } from "@/lib/firestore";
 import Google from "next-auth/providers/google";
+import { getUserData, isOnboarded } from "../database";
 
 export const options: NextAuthOptions = {
   providers: [
@@ -45,11 +46,14 @@ export const options: NextAuthOptions = {
   callbacks: {
     session: async ({ session, token }) => {
       session.user.id = token.id;
-      session.user.role = token.role || "user";
+      session.user.role = token.role || "rider";
+      session.user.onboarded = token.onboarded;
+
       return session;
     },
     jwt: async ({ token, user, account }) => {
       if (user) token.id = user.id;
+      if (user) token.onboarded = await isOnboarded(user.id);
       return token;
     },
   },

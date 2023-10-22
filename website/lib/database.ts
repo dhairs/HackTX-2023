@@ -13,56 +13,53 @@ export interface UserData {
   onboarded: boolean;
 }
 
-export function getUserData(userId: string): UserData {
+export async function getUserData(userId: string): Promise<UserData> {
   const docRef = firestore.collection("users").doc(userId);
 
-  var data: UserData = {} as UserData;
-  docRef.get().then((doc) => {
-    if (doc.exists) {
-      data = doc.data() as UserData;
-      console.log(data);
-    } else {
-      console.log("No such document!");
-    }
-  });
+  var data = (await docRef.get()).data() as UserData;
 
   return data;
 }
 
 // update the user's info
-export function updateUser(userId: string, newData: UserData) {
+export async function updateUser(
+  userId: string,
+  newData: UserData
+): Promise<void> {
   firestore
     .collection("users")
     .doc(userId)
     .update({ ...newData });
+
+  return Promise.resolve();
 }
 
 // set user's first name
-export function setFirstName(userId: string, newFirstName: string) {
-  var data = getUserData(userId);
+export async function setFirstName(userId: string, newFirstName: string) {
+  var data = await getUserData(userId);
   data.firstName = newFirstName;
-  updateUser(userId, data);
+  await updateUser(userId, data);
 }
 
 // set user's last name
-export function setLastName(userId: string, newLastName: string) {
-  var data = getUserData(userId);
+export async function setLastName(userId: string, newLastName: string) {
+  var data = await getUserData(userId);
   data.lastName = newLastName;
-  updateUser(userId, data);
+  await updateUser(userId, data);
 }
 
 // set user's email
-export function setEmail(userId: string, newEmail: string) {
-  var data = getUserData(userId);
+export async function setEmail(userId: string, newEmail: string) {
+  var data = await getUserData(userId);
   data.firstName = newEmail;
-  updateUser(userId, data);
+  await updateUser(userId, data);
 }
 
 // set user's phone number
-export function setPhoneNumber(userId: string, newPhone: string) {
-  var data = getUserData(userId);
+export async function setPhoneNumber(userId: string, newPhone: string) {
+  var data = await getUserData(userId);
   data.firstName = newPhone;
-  updateUser(userId, data);
+  await updateUser(userId, data);
 }
 
 // // set user's username
@@ -73,22 +70,27 @@ export function setPhoneNumber(userId: string, newPhone: string) {
 // }
 
 // set driver's username
-export function setPrice(userId: string, newPrice: number) {
-  var data = getUserData(userId);
+export async function setPrice(userId: string, newPrice: number) {
+  var data = await getUserData(userId);
   data.price = newPrice;
-  updateUser(userId, data);
+  await updateUser(userId, data);
 }
 
 // update driver's rating
-export function updateRating(userId: string, newRating: number) {
-  var data = getUserData(userId);
+export async function updateRating(userId: string, newRating: number) {
+  var data = await getUserData(userId);
   data.rating = newRating;
-  updateUser(userId, data);
+  await updateUser(userId, data);
 }
 
 // set user's username
-export function setDoB(userId: string, newDoB: Date) {
-  var data = getUserData(userId);
+export async function setDoB(userId: string, newDoB: Date) {
+  var data = await getUserData(userId);
   data.dateOfBirth = newDoB;
-  updateUser(userId, data);
+  await updateUser(userId, data);
+}
+
+export async function isOnboarded(userId: string) {
+  var data = await getUserData(userId);
+  return data.onboarded;
 }

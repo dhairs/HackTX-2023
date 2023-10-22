@@ -11,6 +11,10 @@ export default async function OnboardingLayout({
 }) {
   const user = await getServerSession(options);
 
+  if (!user) {
+    redirect(routes.login);
+  }
+
   if (user?.user.onboarded) {
     redirect(routes.ride);
   }

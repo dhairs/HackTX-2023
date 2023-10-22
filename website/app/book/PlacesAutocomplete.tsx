@@ -49,7 +49,7 @@ export const PlacesAutocomplete = ({
         //className={styles.autocompleteInput}
         disabled={!ready}
         onChange={(e) => setValue(e.target.value)}
-        placeholder="123 Stariway To Heaven"
+        placeholder="UT Austin"
       />
 
       {status === "OK" && (
