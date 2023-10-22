@@ -1,4 +1,4 @@
-# HackTX-2023
+# Chariot
 
 Chariot - an Uber-like experience for Bicycle Rickshaws. Read more about the project below:
 
