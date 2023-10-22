@@ -2,6 +2,8 @@ import { UserData, updateUser } from "@/lib/database";
 import type { NextApiRequest, NextApiResponse } from "next";
 import { getServerSession } from "next-auth/next";
 import { options } from "@/lib/auth/options";
+import firestore from "@google-cloud/firestore";
+import { Timestamp } from "firebase-admin/firestore";
 
 export default async function handler(
   req: NextApiRequest,
@@ -12,7 +14,7 @@ export default async function handler(
   if (session) {
     // Signed in
     let data = (await JSON.parse(req.body)) as UserData;
-    data.joinDate = new Date();
+    data.joinDate = Timestamp.fromDate(new Date());
     updateUser(session.user.id, data);
     res
       .status(200)

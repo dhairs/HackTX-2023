@@ -20,7 +20,7 @@ export default function Home() {
   if (!isLoaded) return <div>Loading...</div>;
   return (
     <div className="relative text-center">
-      <div className="absolute z-10 bg-white rounded-sm m-12 h-3/4">
+      <div className="absolute z-10 bg-white rounded-sm m-12 h-3/4 w-72">
         <h1 className="text-2xl font-bold m-5">Book</h1>
         <PlacesAutocomplete
           onAddressSelect={(address) => {

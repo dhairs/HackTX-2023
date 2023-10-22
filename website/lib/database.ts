@@ -1,4 +1,6 @@
+import { DataForDriver } from "@/components/ui/map";
 import { firestore } from "./firestore";
+import { Timestamp } from "@google-cloud/firestore";
 
 export interface UserData {
   firstName: string;
@@ -8,8 +10,9 @@ export interface UserData {
   dateOfBirth: Date;
   isDriver: boolean;
   price?: number;
+  image: string;
   rating?: number;
-  joinDate: Date;
+  joinDate: Timestamp;
   onboarded: boolean;
 }
 
@@ -104,4 +107,29 @@ export async function getAllDrivers() {
   });
 
   return allData;
+}
+
+const testLat = 30.286108;
+const testLng = -97.741679;
+
+export async function getDriverData() {
+  var response: DataForDriver = {};
+  var allData = await getAllDrivers();
+  for (var i = 0; i < allData.length; i++) {
+    let currentData = allData[i];
+    response[currentData.email] = {
+      name: currentData.firstName,
+      position: {
+        lat: testLat - Math.random() * 0.01,
+        lng: testLng - Math.random() * 0.01,
+      },
+      price: currentData.price!,
+      rating: Math.round((Math.random() * 5 + Number.EPSILON) * 100) / 100,
+      ratings: Math.round(Math.random() * 63 + 1),
+      profile_picture: currentData.image,
+      joined: currentData.joinDate.toDate(),
+    };
+  }
+
+  return response;
 }

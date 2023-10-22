@@ -58,6 +58,7 @@ export const options: NextAuthOptions = {
         let newData = await getUserData(user.id);
         token.firstName = newData.firstName;
         token.onboarded = newData.onboarded;
+        token.role = newData.isDriver ? "driver" : "rider";
       }
 
       return token;

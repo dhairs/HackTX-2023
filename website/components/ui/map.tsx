@@ -9,24 +9,27 @@ import {
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
 import { CalendarDays, Star } from "lucide-react";
+import { getDriverData } from "@/lib/database";
+import { getMonth } from "@/lib/dateHelpers";
+import { Timestamp } from "@google-cloud/firestore";
 
-interface DataForDriver {
+export interface DataForDriver {
   [key: string]: {
     name: string;
     position: {
       lat: number;
       lng: number;
     };
-    rate: string;
+    price: number;
     rating: number;
     ratings: number;
     profile_picture: string;
+    joined: Date;
   };
 }
 
 export default function Map() {
   const [location, setLocation] = useState({ lat: 0, lng: 0 });
-  const [data, setData] = useState({} as DataForDriver);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition((position) => {
@@ -34,8 +37,6 @@ export default function Map() {
         lat: position.coords.latitude,
         lng: position.coords.longitude,
       });
-
-      setData(driverData);
     });
   }, []);
   return (
@@ -54,23 +55,35 @@ export default function Map() {
   );
 }
 
-const driverData: DataForDriver = {
-  Test: {
-    name: "Amogh",
-    position: { lat: 30.289204, lng: -97.74148 },
-    rate: "$25",
-    rating: 4.5,
-    ratings: 673,
-    profile_picture:
-      "https://www.landfood.ubc.ca/files/2018/04/will-valley-square-crop-300x300.jpg",
-  },
-};
+// const driverData: DataForDriver = {
+//   Test: {
+//     name: "Amogh",
+//     position: { lat: 30.289204, lng: -97.74148 },
+//     price: 25,
+//     rating: 4.5,
+//     ratings: 673,
+//     profile_picture:
+//       "https://www.landfood.ubc.ca/files/2018/04/will-valley-square-crop-300x300.jpg",
+//   },
+// };
 
 function Driver({ map }: { map: typeof google.maps.Map }) {
   const [data, setData] = useState({} as DataForDriver);
 
   useEffect(() => {
-    setData(driverData);
+    fetch("/api/data/driver-data")
+      .then((data) => {
+        return data.json();
+      })
+      .then((data) => {
+        for (var key in data) {
+          console.log(
+            new Date((data as unknown as DataForDriver)[key].joined).getTime()
+          );
+        }
+
+        setData(data as unknown as DataForDriver);
+      });
   }, []);
 
   return Object.entries(data).map(
@@ -88,7 +101,7 @@ function Driver({ map }: { map: typeof google.maps.Map }) {
                   "w-12 flex h-8 font-bold bg-black rounded-sm items-center"
                 }
               >
-                <h2 className="text-white m-auto text-xs">{driver.rate}</h2>
+                <h2 className="text-white m-auto text-xs">{driver.price}</h2>
               </div>
             </HoverCardTrigger>
             <HoverCardContent className="w-64">
@@ -104,12 +117,14 @@ function Driver({ map }: { map: typeof google.maps.Map }) {
                     <span className="text-gray-600 italic">
                       ({driver.ratings})
                     </span>{" "}
-                    | {driver.rate}
+                    | {"$"}
+                    {driver.price}
                   </p>
                   <div className="flex items-center pt-2">
                     <CalendarDays className="mr-2 h-4 w-4 opacity-70" />{" "}
                     <span className="text-xs text-muted-foreground">
-                      Joined December 2021
+                      Joined {getMonth(new Date(driver.joined).getMonth())}{" "}
+                      {new Date(driver.joined).getFullYear()}
                     </span>
                   </div>
                 </div>
