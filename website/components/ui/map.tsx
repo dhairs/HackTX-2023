@@ -1,17 +1,14 @@
 import { MapStyle } from "@/lib/mapStyle";
 import { GoogleMap, OverlayView } from "@react-google-maps/api";
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   HoverCard,
   HoverCardContent,
   HoverCardTrigger,
 } from "@/components/ui/hover-card";
-import { CalendarDays, Star } from "lucide-react";
-import { getDriverData } from "@/lib/database";
+import { CalendarDays } from "lucide-react";
 import { getMonth } from "@/lib/dateHelpers";
-import { Timestamp } from "@google-cloud/firestore";
 
 export interface DataForDriver {
   [key: string]: {
@@ -41,7 +38,7 @@ export default function Map() {
   }, []);
   return (
     <GoogleMap
-      zoom={10}
+      zoom={15}
       center={{ lat: location.lat, lng: location.lng }}
       mapContainerClassName="w-100 h-screen z-0 fixed"
       options={{
