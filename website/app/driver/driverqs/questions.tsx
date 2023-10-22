@@ -11,7 +11,7 @@ const questions = () => {
   return (
     <div className="something">
       <h1>First Name: </h1>
-      <form>
+      <form onSubmission={saveInput}>
         <input type="text" id="answer"></input>
         <button>Firebase Submission</button>
       </form>
