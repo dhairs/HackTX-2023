@@ -1,3 +1,5 @@
+import { signIn } from "next-auth/react";
+
 export const routes = {
   home: "/",
   login: "/login",
@@ -7,4 +9,8 @@ export const routes = {
   profile: "/profile",
   settings: "/settings",
   notFound: "/404",
+};
+
+export const routingFunctions = {
+  login: signIn,
 };

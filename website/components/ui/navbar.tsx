@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { getServerSession } from "next-auth/next";
-import { options } from "../../app/api/auth/[...nextauth]/options";
-import { routes } from "@/lib/constants";
+import { routes, routingFunctions } from "@/lib/constants";
+import { getServerSession } from "next-auth";
+import { options } from "@/lib/auth/options";
 
 export default async function Navbar() {
   const session = await getServerSession(options);
@@ -73,17 +73,19 @@ export default async function Navbar() {
           </div>
           <div className="flex items-center lg:order-2">
             <Link
-              href={routes.login}
+              href={session ? routes.dashboard : routes.login}
               className="duration-150 p-2 text-gray-100 border-purple-400 border-2 hover:bg-purple-400 focus:ring-4 focus:ring-gray-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 focus:outline-none"
             >
-              Log in
+              {session ? "Dashboard" : "Login"}
             </Link>
-            <Link
-              href="#"
-              className="duration-150 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 bg-purple-400 hover:bg-black border-purple-400 border-2 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
-            >
-              Get started
-            </Link>
+            {!session ? (
+              <Link
+                href={routes.register}
+                className="duration-150 text-white bg-primary-700 hover:bg-primary-800 focus:ring-4 bg-purple-400 hover:bg-black border-purple-400 border-2 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 mr-2 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800"
+              >
+                Get started
+              </Link>
+            ) : null}
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"

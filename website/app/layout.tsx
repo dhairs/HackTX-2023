@@ -17,8 +17,6 @@ export default function RootLayout({
   children: React.ReactNode;
   pageProps: any;
 }) {
-  // getUserData("2L6cdOmbI6zhq0sU2TLe");
-
   return (
     <html lang="en">
       <body className={inter.className}>
