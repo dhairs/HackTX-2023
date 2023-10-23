@@ -15,7 +15,7 @@ export default async function handler(
     // Signed in
     let data = (await JSON.parse(req.body)) as UserData;
     data.joinDate = Timestamp.fromDate(new Date());
-    updateUser(session.user.id, data);
+    await updateUser(session.user.id, data);
     res
       .status(200)
       .redirect("/book")

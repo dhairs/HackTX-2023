@@ -4,7 +4,7 @@ Chariot - an Uber-like experience for Bicycle Rickshaws. Read more about the pro
 
 ## Inspiration
 
-Around Austin, you'll find yourself faced with the decision to choose a form of transportation from a plethora of choices. One of those choices is uniquely _Austin_: Bicycle Rickshaws. You'll usually see people riding around in them before or after big events, but they're never gone. That's what led us to our idea. Why let it be difficult for people to find these rides if we could develop something to make it easier? Also, we noticed that the people driving—similar to the riders—unable to find someone willing to get a ride. For that reason, Chariot is perfect for not only helping people get cheaper transportation in a fun, unique way, but it's also great for benefiting those actually doing the biking by bringing them more business.
+Around Austin, you'll find yourself faced with the decision to choose a form of transportation from a plethora of choices. One of those choices is uniquely _Austin_: Bicycle Rickshaws. You'll usually see people riding around in them before or after big events, but they're never gone. That's what led us to our idea. Why let it be difficult for people to find these rides if we could develop something to make it easier? Also, we noticed that the people driving—similar to the riders—are often unable to find someone willing to get a ride. For that reason, Chariot is perfect for not only helping people get cheaper transportation in a fun, unique way, but it's also great for benefiting those actually doing the biking by bringing them more business.
 
 ## What it does
 
